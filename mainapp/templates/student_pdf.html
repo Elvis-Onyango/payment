@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Fee Details</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      h1, h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{{ school.name }}</h1>
+    <h2>Student Fee Details</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Admission Number</th>
+          <th>Fee Paid</th>
+          <th>Fee Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ student.student_first_name }}</td>
+          <td>{{ student.student_last_name }}</td>
+          <td>{{ student.admission_number }}</td>
+          <td>{{ student.total_fee_paid }}</td>
+          <td>{{ student.fee_balance }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+   <link href="{% static 'assets/vendor/aos/aos.css' %}">
+   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+   <script>
+    function filterFunction(input, event) {
+        const query = input.value.toLowerCase();
+        const ul = document.getElementById("search-results");
+        const items = ul.getElementsByTagName("li");
+
+        if (query) {
+            ul.style.display = "block";
+            for (let i = 0; i < items.length; i++) {
+                let item = items[i];
+                if (item.innerHTML.toLowerCase().indexOf(query) > -1) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            }
+        } else {
+            ul.style.display = "none";
+        }
+    }
+</script>
+    <title>payment</title>
+    <style>
+      .searchable {
+          position: relative;
+      }
+      ul {
+          border: 1px solid #ccc;
+          display: none;
+          max-height: 200px;
+          overflow-y: auto;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          width: 100%;
+      }
+      ul li {
+          padding: 8px;
+          cursor: pointer;
+      }
+      ul li:hover {
+          background-color: #f1f1f1;
+      }
+  </style>
+  </head>
+  <body>
+    <header class="page-header" >
+    <nav class="navbar navbar-expand-lg navbar-light bg-success navbar-fixed-top navbar-inverse" >
+        <div class="container-fluid " >
+          <h2><a class="navbar-brand" href="#">Fee payment Portal</a></h2>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active scrollto active" aria-current="page" href="#hero">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link scrollto" href="#features">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link scrollto" href="#help">help</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link scrollto" href="{% url 'add_school' %}">Register school</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header> 
+      <main>
+        {% if message %}
+			<div class="alert alert-primary" role="alert">
+				{% for msg in message %}
+				{{ msg }}
+				{% endfor %}
+			</div>
+			{% endif %}
+        <section id="hero" class="d-flex align-items-center">
+
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+                  <h1>payment.</h1>
+                  <h2>We are here to make your payment easier</h2>
+                  <div class="d-flex justify-content-center justify-content-lg-start">
+                    <form action="{% url 'school_search' %}" id="search-form" role="search" method="get">
+                      <div class="searchable">
+                          {% csrf_token %}
+                          <input class="text-black" type="search" name="search_query" placeholder="Search your school" aria-label="Search" id="search_query" onkeyup="filterFunction(this, event)">
+                          <button class="btn btn-outline-success" type="submit" value="search"><i class="bi bi-search"></i></button>
+                          <br>
+                          <ul id="search-results">
+                              {% for school in schools %}
+                                  <li onclick="selectSchool('{{ school.name }}')">{{ school.name }}</li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </form>
+                  </div>
+                </div>
+            
+                <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+                  <img src="{% static 'image/payment-5.jpg' %}" class="img-fluid animated rounded" alt="">
+                </div>
+              </div>
+            </div>
+        
+          </section>
+        <section class="mt-2" id = "features">
+            <h1 class="text-center">Features</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-5 lg-4 md-4 sm-6 hero-img" >
+                            <img src="{% static 'image/payment-3.jpg' %}" class="img-fluid animated rounded" alt="">
+                        </div>
+                    <div class="col-7 lg-4 md-4 sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                              <div class="card bg-info">
+                                <div class="card-body">
+                                  <h5 class="card-title">Secure payment</h5>
+                                  <p class="card-text">we offer secure payment.</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="card bg-info">
+                                <div class="card-body">
+                                  <h5 class="card-title">Flexible Payment</h5>
+                                  <p class="card-text">We offer Flexible Payment.</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row mt-5">
+                            <div class="col-sm-6">
+                              <div class="card bg-info">
+                                <div class="card-body">
+                                  <h5 class="card-title">Secure payment</h5>
+                                  <p class="card-text">we offer secure payment.</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="card bg-info">
+                                <div class="card-body">
+                                  <h5 class="card-title">Flexible Payment</h5>
+                                  <p class="card-text">We offer Flexible Payment.</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                </div>
+            </div>
+        </section>
+  <section id="help">
+       <div class="container">
+        <div class="row">
+            <div class="col justify-content-center">
+        <div class="help-section">
+          <h2 class="text-center mb-4">Help & Support</h2>
+          
+          <div class="card help-card">
+            <div class="card-body">
+              <h5 class="card-title">FAQs</h5>
+              <p class="card-text">Have questions? Check out our frequently asked questions to find answers to common queries.</p>
+              <a href="#" class="btn btn-primary">View FAQs</a>
+            </div>
+          </div>
+          
+          <div class="card help-card mt-4">
+            <div class="card-body">
+              <h5 class="card-title">Contact Us</h5>
+              <p class="card-text">Need further assistance? Feel free to reach out to our support team.</p>
+              <a href="#" class="btn btn-primary">Contact Support</a>
+            </div>
+          </div>
+
+          <div class="card help-card mt-4">
+            <div class="card-body">
+              <h5 class="card-title">Video Tutorials</h5>
+              <p class="card-text">Watch step-by-step video tutorials on how to use our fee payment system.</p>
+              <a href="#" class="btn btn-primary">Watch Tutorials</a>
+            </div>
+          </div>
+
+        </div>           
+            </div>
+            </div>
+        </div>
+       </div>
+  </section>
+      </main>
+
+      <footer class="bg-info text-center">
+   
+        <div class="container p-4"></div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2024 Copyright:
+          <a class="text-body" href="#"></a>
+        </div>
+      </footer>
+
+      <script>
+        function selectSchool(name) {
+            document.getElementById('search_query').value = name;
+            document.getElementById('search-results').style.display = 'none';
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  </body>
+</html>

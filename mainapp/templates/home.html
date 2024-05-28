@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <h2>LIST OF REGISTERED SCHOOLS</h2>
+    <ul style="list-style: none;">
+        {% for school in schools %}
+            <li style="background-color:white; font-size: 25px;font-family:Times new roman">{{ school.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Students Details:</h2>
+    <table style="min-width: 568px;">
+        <thead style="height: 70px;">
+            <tr style="background-color:blueviolet; font-size: 25px;font-family:Times new roman;min-width: 568px;">
+                <th>
+                 STUDENT NAME
+                </th>
+                <th>
+                    SCHOOL NAME
+                </th>
+                <th>
+                    PARENT PHONE NUMBER
+                </th>
+                <th>
+                    FEE PAYED
+                </th>
+                <th>
+                    FEE BALANCE
+                </th>
+                <th>
+                    POCKET MONEY BALANCE
+                </th>
+
+            </tr>
+        </thead>
+        <tbody style="background-color: white;">
+             {% for student in students %}
+            <tr style="border: 5px solid white;min-width: 568px;">
+                <td style="border: 1px solid black; font-size: 25px;font-family:Times new roman">{{ student.name }}</td>
+                <td style="border: 1px solid black; font-size: 25px;font-family:Times new roman">{{ student.school }}</td>
+                <td style="border: 1px solid black; font-size: 25px;font-family:Times new roman">{{ student.parent_phone }}</td>
+                <td style="border: 1px solid black; font-size: 25px;font-family:Times new roman">{{ student.fee_paid }}</td>
+                <td style="border: 1px solid black; font-size: 25px;font-family:Times new roman">{{ student.fee_balance }}</td>
+                <td style="border: 1px solid black; font-size: 25px;font-family:Times new roman">{{ student.pocket_money_balance }}</td>
+            </tr>
+             {% endfor %}
+        </tbody>
+    </table>
+    </ul>
+    {% endblock %}
+</body>
+</html>

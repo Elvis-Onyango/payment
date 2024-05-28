@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Open Sans Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <!-- Vendor CSS Files -->
+   <link href="{% static 'assets/vendor/aos/aos.css' %}">
+   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+   <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/dashboard.css' %}">
+    <style>
+      #bi-icon{
+        font-size:30px;
+        margin-bottom:10px;
+      }
+    
+      .card{
+        border:1px solid hsl(0,0%,80%);
+        box-shadow:5px 5px 5px rgba(105, 103, 103, 0.986);
+        padding: 20px;
+        margin:10px;
+        text-align:center;
+        max-width: 250px;
+        display:inline-block;
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <form class="form m-5" action="post" target='blank'>
+            <div class="d-flex flex-md-row m-0">
+            <input  class="input-group " style="width:100%;height:40px;border:0px" placeholder="search..."/>
+            <button type="search" class="btn btn-primary"><i class="bi bi-search"></i></submit>
+            </div>
+             
+        </form>
+
+        </div>
+        <div class="header-right d-flex ">
+          <div class="nav-item mt-2">
+            <span class="bi bi-bell m-5" id ='bi-icon'></span>
+    
+
+        </div>
+          <div class="d-grid mt-2">
+          <i class="bi bi-person-circle m-0" id ='bi-icon'></i>
+          <p class="lead m-0">Admin</p>
+        </div>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> {{school.name}}
+          </div>
+          <span class="bi bi-x" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="#dashboard">
+              <span class="bi bi-dashboard" id ='bi-icon'></span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#">
+              <span class="bi bi-wallet-fill" id ='bi-icon'></span> Account
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#">
+              <span class="bi bi-people-fill" id ='bi-icon'></span> Student
+            </a>
+          </li>
+        
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#">
+              <span class="bi bi-outlined"></span> Help/FAQ
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <section>
+        <div class="main-title">
+          <h2>DASHBOARD</h2>
+        </div>
+
+        <div class="main-cards">
+
+          <div class="card">
+            <div class="card-inner">
+              <h2>Total fee paid</h2>
+            </div>
+            <h1>{{total_fee_paid}}</h1>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <h2>Total fee Due</h2>
+            </div>
+            <h1>{{total_fee_due}}</h1>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <h2>students done paying fee</h2>
+            </div>
+            <h1>3,841</h1>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <h2>students not done paying fee</h2>
+            </div>
+            <h1>1,962</h1>
+          </div>
+
+        </div>
+      </section>
+        <hr>
+        <section class="bg-white">
+          <div class="row">
+            <div id="searchContent" class="col">
+
+            </div>
+        </section>
+        <hr>
+        <section class="animated m-5">
+        <div class="container">
+            <h2 class="text-center">Student Fee Details</h2>
+            <div class="mt-4">
+              <form class="form" id="studentForm" action = "{% url 'add_student' %}" method="post">
+                <div class="form-group">
+                  <label for="firstName">First Name:</label>
+                  <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name:</label>
+                  <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                  <label for="admissionNumber">Admission Number:</label>
+                  <input type="text" id="admissionNumber" name="admissionNumber" required>
+                </div>
+                <div class="form-group">
+                  <label for="feePaid">Fee Paid:</label>
+                  <input type="number" id="feePaid" name="feePaid" required>
+                </div>
+                <div class="form-group">
+                  <label for="feeBalance">Fee Balance:</label>
+                  <input type="number" id="feeBalance" name="feeBalance" required>
+                </div>
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+            </section>
+            <hr>
+            <section>
+              <table class="table table-striped" id="studentFeeTable">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Admission Number</th>
+                    <th>Fee Paid</th>
+                    <th>Fee Balance</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="student">
+                  {% for i in students %}
+                  <tr>
+                    <td>{{ i.student_first_name }}</td>
+                    <td>{{ i.student_last_name }}</td>
+                    <td>{{ i.admission_number }}</td>
+                    <td>{{ i.total_fee_paid }}</td>
+                    <td>{{ i.fee_balance }}</td>
+                    <td>
+                      <button class="btn btn-primary" onclick="window.location.href='#'">Print PDF</button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </section>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- End Main -->
+
+    </div>
+
+    <!-- Custom JS -->
+    <script type="text/javascript">
+let sidebarOpen = false;
+const sidebar = document.getElementById('sidebar');
+
+function openSidebar() {
+  if (!sidebarOpen) {
+    sidebar.classList.add('sidebar-responsive');
+    sidebarOpen = true;
+  }
+}
+
+function closeSidebar() {
+  if (sidebarOpen) {
+    sidebar.classList.remove('sidebar-responsive');
+    sidebarOpen = false;
+  }
+}
+
+
+    </script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  </body>
+</html>

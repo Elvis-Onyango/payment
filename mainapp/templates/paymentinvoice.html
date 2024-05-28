@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<main class="container">
+			{% for Transaction in Transactions %}
+			<p class="text-white" style="font-size: 16px;font-family: sans-serif;">{{Transaction.student.fast_name}}</p>
+			<p class="text-white" style="font-size: 16px;font-family: sans-serif;">{{Transaction.student.last_name}}</p>
+			<p class="text-white" style="font-size: 16px;font-family: sans-serif;">{{Transaction.amount}}</p>
+			<p class="text-white" style="font-size: 16px;font-family: sans-serif;">{{Transaction.transaction_type}}</p>
+			{% endfor %}
+		</main>	
+	</div>
+</div>		
+{% endblock %}
